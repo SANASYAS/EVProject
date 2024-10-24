@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'users/css/styles.css' %}">
+    <style>
+        /* Overall Styling */
+        body {
+            font-family: 'Poppins', sans-serif; /* Changed font to Poppins */
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa; /* Light blue background */
+        }
+
+        .wrapper {
+            width: 350px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 5px;
+            background-color: #fff; /* White form container */
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            font-family: 'Poppins';
+        }
+
+        /* Form Title */
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333; /* Dark gray title text */
+            font-family: 'Poppins';
+            
+        }
+
+        /* Input Fields */
+        .input-box {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Spacing between input fields */
+            font-family: 'Poppins';
+        }
+
+        .input-field {
+            position: relative;
+            display: flex;
+            align-items: center;
+            font-family: 'Poppins';
+        }
+
+        .input-field input, .input-field select {
+            width: 100%;
+            padding: 10px 40px 10px 15px; /* Adjusted padding to add space for the icon */
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 3px;
+            font-size: 16px;
+            transition: border-color 0.2s ease-in-out;
+            font-family: 'Poppins';
+        }
+
+        .input-field input:focus, .input-field select:focus {
+            border-color: #3399ff; /* Blue border on focus */
+            font-family: 'Poppins';
+        }
+
+        .input-field i {
+            position: absolute;
+            right: 10px; /* Position the icon to the right */
+            top: 50%; /* Center vertically */
+            transform: translateY(-50%); /* Adjust vertical alignment */
+            font-size: 18px;
+            font-family: 'Poppins';
+            color: #060101; /* Lighter icon color */
+        }
+
+        /* Submit Button */
+        .btn {
+            display: block;
+            width: 150px; /* Reduced width for smaller button */
+            padding: 10px 20px;
+            background-color: #3399ff; /* Blue button color */
+            color: #fff; /* White button text */
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            margin: 20px auto; /* Center the button */
+            font-family: 'Poppins';
+        }
+
+        .btn:hover {
+            background-color: #2e8bcc; /* Darker blue on hover */
+        }
+
+        /* Error Messages */
+        .error-messages {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Registration</h1>
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="input-box">
+                <!-- Username -->
+                <div class="input-field">
+                    <input type="text" name="username" placeholder="Username" value="{{ form.username.value|default:'' }}" required>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <!-- Email -->
+                <div class="input-field">
+                    <input type="email" name="email" placeholder="Email" value="{{ form.email.value|default:'' }}" required>
+                    <i class='bx bxs-envelope'></i>
+                </div>
+                <!-- Password -->
+                <div class="input-field">
+                    <input type="password" name="password1" placeholder="Password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <!-- Re-enter Password -->
+                <div class="input-field">
+                    <input type="password" name="password2" placeholder="Confirm Password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <!-- Role Dropdown -->
+                <div class="input-field">
+                    <select id="role" name="role" required>
+                        <option value="" disabled selected>Select Role</option>
+                        <option value="fleet_manager">Fleet Manager</option>
+                        <option value="driver">Driver</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn">Register</button>
+        </form>
+        
+        <!-- Display Form Errors -->
+        {% if form.errors %}
+        <div class="error-messages">
+            <ul>
+                {% for field in form %}
+                    {% if field.errors %}
+                        <li>{{ field.label }}: {{ field.errors }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

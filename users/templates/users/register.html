@@ -8,99 +8,124 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'users/css/styles.css' %}">
+
     <style>
-        /* Overall Styling */
+        /* Body and Overall Styling */
         body {
-            font-family: 'Poppins', sans-serif; /* Changed font to Poppins */
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff); /* Gradient background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-            background-color: #e0f7fa; /* Light blue background */
         }
 
+        /* Container Styling */
         .wrapper {
-            width: 350px;
-            margin: 50px auto;
-            padding: 30px;
-            border-radius: 5px;
-            background-color: #fff; /* White form container */
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-            font-family: 'Poppins';
+            font-family: 'Poppins', sans-serif;
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.9); /* Slight transparency for modern look */
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+            color: #333; /* Darker text for readability */
         }
 
-        /* Form Title */
+        /* Title Styling */
         h1 {
             text-align: center;
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #333; /* Dark gray title text */
-            font-family: 'Poppins';
-            
+            font-size: 2rem;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: 600;
         }
 
-        /* Input Fields */
+        /* Form Fields Styling */
         .input-box {
             display: flex;
+            font-family: 'Poppins', sans-serif;
             flex-direction: column;
-            gap: 20px; /* Spacing between input fields */
-            font-family: 'Poppins';
+            gap: 25px; /* Increased gap for better spacing */
         }
 
         .input-field {
             position: relative;
             display: flex;
+            font-family: 'Poppins', sans-serif;
             align-items: center;
-            font-family: 'Poppins';
         }
 
         .input-field input, .input-field select {
             width: 100%;
-            padding: 10px 40px 10px 15px; /* Adjusted padding to add space for the icon */
-            border: 1px solid #ccc; /* Light gray border */
-            border-radius: 3px;
+            padding: 12px 15px 12px 45px; /* Adjusted padding to account for the icons */
+            border: 1px solid #ccc;
+            border-radius: 5px;
             font-size: 16px;
+            font-family: 'Poppins', sans-serif;
             transition: border-color 0.2s ease-in-out;
-            font-family: 'Poppins';
+            appearance: none; /* Hide default dropdown arrow for custom styling */
         }
 
         .input-field input:focus, .input-field select:focus {
-            border-color: #3399ff; /* Blue border on focus */
-            font-family: 'Poppins';
+            border-color: #0072ff; /* Blue border on focus to match theme */
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Dropdown Arrow Icon for Select */
+        .input-field select {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>');
+            background-repeat: no-repeat;
+            font-family: 'Poppins', sans-serif;
+            background-position: right 15px center; /* Position the custom dropdown arrow */
+            background-size: 20px; /* Size of the dropdown arrow */
         }
 
         .input-field i {
             position: absolute;
-            right: 10px; /* Position the icon to the right */
-            top: 50%; /* Center vertically */
-            transform: translateY(-50%); /* Adjust vertical alignment */
-            font-size: 18px;
-            font-family: 'Poppins';
-            color: #060101; /* Lighter icon color */
+            left: 15px; /* Keep icon on the left */
+            font-family: 'Poppins', sans-serif;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #333;
         }
 
-        /* Submit Button */
+        /* Button Styling */
         .btn {
-            display: block;
-            width: 150px; /* Reduced width for smaller button */
-            padding: 10px 20px;
-            background-color: #3399ff; /* Blue button color */
-            color: #fff; /* White button text */
+            width: 100%;
+            padding: 12px;
+            background-color: #00c6ff;
+            color: #fff;
             border: none;
-            border-radius: 3px;
-            font-size: 16px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.2s ease-in-out;
-            margin: 20px auto; /* Center the button */
-            font-family: 'Poppins';
+            transition: background-color 0.3s ease;
+            text-transform: uppercase; /* Makes button text all caps */
+            margin-top: 20px; /* Added margin to create space between button and dropdown */
         }
 
         .btn:hover {
-            background-color: #2e8bcc; /* Darker blue on hover */
+            background-color: #0072ff;
         }
 
-        /* Error Messages */
+        /* Error Message Styling */
         .error-messages {
             color: red;
             margin-top: 10px;
+        }
+
+        /* For responsive styling on mobile */
+        @media (max-width: 768px) {
+            .wrapper {
+                width: 90%;
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -137,23 +162,26 @@
                         <option value="fleet_manager">Fleet Manager</option>
                         <option value="driver">Driver</option>
                     </select>
+                    <i class='bx bxs-user-circle'></i> <!-- Icon for the dropdown -->
                 </div>
             </div>
-            <button type="submit" class="btn">Register</button>
+            <button type="submit" class="btn">REGISTER</button>
         </form>
-        
+
         <!-- Display Form Errors -->
-        {% if form.errors %}
-        <div class="error-messages">
-            <ul>
-                {% for field in form %}
-                    {% if field.errors %}
-                        <li>{{ field.label }}: {{ field.errors }}</li>
-                    {% endif %}
+{% if form.errors %}
+<div class="error-messages">
+    <ul>
+        {% for field in form %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
                 {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
     </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 # from django.shortcuts import render, redirect
 # from django.contrib import messages
 # from .forms import UserRegistrationForm
+from django.shortcuts import render
 
 # def register(request):
 #     if request.method == 'POST':
@@ -85,3 +86,22 @@ def fleet_manager_home_view(request):
 def driver_home_view(request):
     # Logic for the driver's home page
     return render(request, 'users/driver_home.html')
+
+
+
+from django.shortcuts import render
+
+def introduction_to_ev(request):
+    return render(request, 'users/introduction_to_ev.html')
+
+def dataset(request):
+    return render(request, 'users/dataset.html')
+
+def distribution(request):
+    return render(request, 'users/distribution.html')
+
+def relationship(request):
+    return render(request, 'users/relationship.html')
+
+def vehicle_status(request):
+    return render(request, 'users/vehicle_status.html')
